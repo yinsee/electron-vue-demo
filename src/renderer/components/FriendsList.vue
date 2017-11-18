@@ -1,10 +1,13 @@
 <template>
   <div class="d-flex flex-column">
-    <h6 class="header">Chatroom</h6>
+    <h6 class="header">
+      Chatroom
+      <a href="#!" v-on:click="logout()" style="float:right" v-if="loggedIn">Logout</a>
+    </h6>
     <ul class="list-group fill">
       <li class="list-group-item d-flex justify-content-between align-items-center" v-for="(user, index) in users" :key="index">
         {{user.name}}
-        <span class="badge badge-primary badge-pill">{{user.badge}}</span>
+        <span class="badge badge-primary badge-pill">{{user.name==loggedin_as ? 'you' : ''}}</span>
       </li>
     </ul>
     <div class="header input-group flex1" v-if="!loggedIn">
@@ -28,6 +31,7 @@
     computed: {
       ...mapState({
         users: state => state.Firebase.users,
+        loggedin_as: state => state.Firebase.username,
         loggedIn: state => state.Firebase.loggedIn
       })
     },
@@ -38,6 +42,11 @@
           return
         }
         this.$store.dispatch('login', this.username)
+      },
+
+      logout () {
+        this.username = ''
+        this.$store.dispatch('logout')
       }
     }
   }

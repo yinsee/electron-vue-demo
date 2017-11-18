@@ -16,7 +16,10 @@
   import FriendsList from '@/components/FriendsList'
   export default {
     name: 'App',
-    components: { FriendsList }
+    components: { FriendsList },
+    mounted () {
+      this.$store.dispatch('init_firebase')
+    }
   }
 </script>
 

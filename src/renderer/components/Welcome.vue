@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex flex-column">
-    <h6 v-if="!editTopic" class="header" v-on:click="edit_topic()">{{topic||'Welcome!'}}</h6>
+    <h6 v-if="!editTopic" class="header editable" v-on:click="edit_topic()">{{topic||'Welcome!'}}</h6>
     <div class="header input-group" v-if="editTopic">
       <input type="text" class="form-control" placeholder="Enter message" v-model="newtopic" v-on:keypress.enter.prevent="set_topic()">
       <button class="input-group-addon" v-on:click="set_topic()">Set Topic</button>
@@ -73,5 +73,8 @@
   }
   .chat {
     display: inline-block;
+  }
+  .editable {
+    cursor: text;
   }
 </style>
